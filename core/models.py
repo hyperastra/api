@@ -14,7 +14,6 @@ class ApiKey(models.Model):
         "core.User", on_delete=models.CASCADE, related_name="api_keys"
     )
 
-
 class User(AbstractUser):
     """Custom user class"""
     email = CIEmailField(unique=True, null=True)
@@ -64,7 +63,6 @@ class Device(models.Model):
         unique_together = ("device", "user")
         permissions = (("manage_all_devices", "Manage all devices"),)
 
-
 class DeviceToken(models.Model):
     """Model for DeviceToken"""
     token = models.CharField(max_length=255, unique=True, null=False, blank=False)
@@ -73,7 +71,6 @@ class DeviceToken(models.Model):
     )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-
 
 class Plan(models.Model):
     """Model for Plan"""
