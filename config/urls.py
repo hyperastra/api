@@ -25,5 +25,6 @@ def root_view(request):
 
 urlpatterns = [
     url(r"^v1/", include("core.urls")),
+    url(r'^v1/auth/', include('auth.urls')),
     path('admin/', admin.site.urls),
 ]
