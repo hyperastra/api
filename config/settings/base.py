@@ -149,8 +149,10 @@ fb_credentials = json.loads(fb_service_key)
 cred = credentials.Certificate(fb_credentials)
 firebase_admin.initialize_app(cred)
 
+SENDGRID_API = os.getenv(
+    "SENDGRID_API", default='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')
+
 # TODO: Add rq-worker later
 # TODO: Add Twilio API key
-# TODO: Add Sendgrid API key
 # TODO: Add Stripe API key
 # TODO: Add currency converter API key
