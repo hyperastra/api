@@ -22,6 +22,7 @@ class User(AbstractUser):
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
     date_joined = models.DateTimeField(default=timezone.now)
+    verified = models.BooleanField(default=False)
     objects = UserManager()
 
     REQUIRED_FIELDS = ["email" "first_name", "last_name"]

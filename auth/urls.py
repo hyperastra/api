@@ -1,6 +1,7 @@
-from auth import views
 from django.conf.urls import url
 
+from auth import views
+
 urlpatterns = [
-    url(r'^signup/$', views.SignUpView.as_view(), name='sign-up'),
+    url(r'^sign_up/$', views.SignUpView.as_view(), name='sign-up'),
 ]
