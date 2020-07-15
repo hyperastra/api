@@ -14,10 +14,12 @@ class ApiKey(models.Model):
         "core.User", on_delete=models.CASCADE, related_name="api_keys"
     )
 
+
 class User(AbstractUser):
     """Custom user class"""
     email = CIEmailField(unique=True, null=True)
-    firebase_id = models.CharField(max_length=100, unique=True, null=True, blank=True)
+    firebase_id = models.CharField(
+        max_length=100, unique=True, null=True, blank=True)
     phone_number = models.CharField(max_length=25, blank=True, null=True)
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
@@ -34,20 +36,26 @@ class User(AbstractUser):
 
     class Meta:
         ordering = ["first_name"]
-        indexes = [models.Index(fields=["email"]), models.Index(fields=["firebase_id"])]
+        indexes = [models.Index(fields=["email"]),
+                   models.Index(fields=["firebase_id"])]
+
 
 class UserSetting(models.Model):
     """Model for UserSetting"""
 
+
 class UserConnectedApp(models.Model):
     """Model for UserConnectedApp"""
+
 
 class UserInvitation(models.Model):
     """Model for UserInvitation"""
 
+
 class Device(models.Model):
     """Model for Device"""
-    device = models.CharField(max_length=255, unique=True, null=False, blank=False)
+    device = models.CharField(
+        max_length=255, unique=True, null=False, blank=False)
     platform = models.CharField(max_length=255, null=False, blank=False)
     accepts_notifications = models.BooleanField(default=False, null=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -64,14 +72,17 @@ class Device(models.Model):
         unique_together = ("device", "user")
         permissions = (("manage_all_devices", "Manage all devices"),)
 
+
 class DeviceToken(models.Model):
     """Model for DeviceToken"""
-    token = models.CharField(max_length=255, unique=True, null=False, blank=False)
+    token = models.CharField(
+        max_length=255, unique=True, null=False, blank=False)
     device = models.OneToOneField(
         Device, on_delete=models.CASCADE, related_name="token"
     )
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
 
 class Plan(models.Model):
     """Model for Plan"""

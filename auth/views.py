@@ -128,6 +128,7 @@ class VerifyView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
+        email=request.data.get('email')
         # email en el request.data
         # 1. Comprobar si el email viene
         # 2. Obtener el usuario de la base de datos
@@ -135,4 +136,20 @@ class VerifyView(APIView):
         # 4. Poner el campo verified del user a True
         # 5. Actualizar en firebase con la funcion update_user de auth la propiedad email_verified y ponerle a True
         # 6. Devolver un 200
-        pass
+        
+        email =request.data.get('email')
+        user = User.objects.filter(email=email)
+        data = {}
+        if user.exists():
+            user.verified = True
+            user.save()
+            auth.update_user(user)
+            return Response(status=status.HTTP_200_OK)
+        else:
+            data['code'] = 'user-not-found'
+            data['messsage'] = f'User email does not exist'
+            return Response(data=data, status=status.HTTP_404_NOT_FOUND)
+
+
+
+ 
