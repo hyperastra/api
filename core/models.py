@@ -17,16 +17,16 @@ class ApiKey(models.Model):
 
 class User(AbstractUser):
     """Custom user class"""
+
     email = CIEmailField(unique=True, null=True)
-    firebase_id = models.CharField(
-        max_length=100, unique=True, null=True, blank=True)
+    firebase_id = models.CharField(max_length=100, unique=True, null=True, blank=True)
     phone_number = models.CharField(max_length=25, blank=True, null=True)
     first_name = models.CharField(max_length=30, blank=True)
     last_name = models.CharField(max_length=150, blank=True)
     date_joined = models.DateTimeField(default=timezone.now)
     verified = models.BooleanField(default=False)
-    objects = UserManager()
 
+    objects = UserManager()
     REQUIRED_FIELDS = ["email" "first_name", "last_name"]
 
     USERNAME_FIELD = "email"
@@ -36,8 +36,7 @@ class User(AbstractUser):
 
     class Meta:
         ordering = ["first_name"]
-        indexes = [models.Index(fields=["email"]),
-                   models.Index(fields=["firebase_id"])]
+        indexes = [models.Index(fields=["email"]), models.Index(fields=["firebase_id"])]
 
 
 class UserSetting(models.Model):
@@ -54,8 +53,8 @@ class UserInvitation(models.Model):
 
 class Device(models.Model):
     """Model for Device"""
-    device = models.CharField(
-        max_length=255, unique=True, null=False, blank=False)
+
+    device = models.CharField(max_length=255, unique=True, null=False, blank=False)
     platform = models.CharField(max_length=255, null=False, blank=False)
     accepts_notifications = models.BooleanField(default=False, null=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -75,8 +74,8 @@ class Device(models.Model):
 
 class DeviceToken(models.Model):
     """Model for DeviceToken"""
-    token = models.CharField(
-        max_length=255, unique=True, null=False, blank=False)
+
+    token = models.CharField(max_length=255, unique=True, null=False, blank=False)
     device = models.OneToOneField(
         Device, on_delete=models.CASCADE, related_name="token"
     )
@@ -86,5 +85,6 @@ class DeviceToken(models.Model):
 
 class Plan(models.Model):
     """Model for Plan"""
+
     name = models.CharField(max_length=80)
     price = models.FloatField()

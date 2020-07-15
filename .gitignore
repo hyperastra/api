@@ -2,3 +2,4 @@
 /config/settings/dev.py
 .vscode/*
 *.sqlite3
+.idea/*
