@@ -1,2 +1,4 @@
 *.pyc
 /config/settings/dev.py
+.vscode/*
+*.sqlite3
